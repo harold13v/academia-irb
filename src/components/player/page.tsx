@@ -142,9 +142,18 @@ function ClassBar({ outline, onDrawer, onResources }: { outline: OutlineView; on
           </button>
         )}
         {lesson.kind === 'practice' ? (
-          <a className={btn('primary', 'md', 'hide-sm')} href={regHref} onClick={trackReg}>
-            Reservar mi lugar
-          </a>
+          <>
+            <span className="cb-live hide-sm tnum">
+              <span className="live-dot" aria-hidden="true" />
+              <span className="stack">
+                <b>En vivo · Mar 1 dic · 7:00 p. m.</b>
+                <span>{EVENT.title}</span>
+              </span>
+            </span>
+            <a className={btn('primary', 'md', 'hide-sm cta-glow')} href={regHref} onClick={trackReg}>
+              Reservar mi lugar <Icon name="arrow_forward" />
+            </a>
+          </>
         ) : (
           <button type="button" className={btn('tertiary', 'md')} onClick={onDrawer} aria-label="Progreso del curso">
             <Icon name="playlist_play" /> <span className="hide-sm">Clases</span>
@@ -171,7 +180,9 @@ function FamCard() {
   useEffect(() => setLeft(daysLeft()), []);
   return (
     <div className="fam-cta">
-      <p className="t-overline c-variant">Siguiente paso</p>
+      <p className="fam-over">
+        <span className="live-dot" aria-hidden="true" /> Siguiente paso · En vivo
+      </p>
       <h3 className="t-card" style={{ marginTop: 4 }}>
         {EVENT.title}
       </h3>
@@ -204,7 +215,7 @@ function MobileFamBar() {
         <b className="t-label-l">Mar 1 dic · En vivo</b>
         <span className="t-label-s c-variant">{left}</span>
       </span>
-      <a className={btn('primary')} href={regHref} onClick={trackReg}>
+      <a className={btn('primary', 'md', 'cta-glow')} href={regHref} onClick={trackReg}>
         Reservar mi lugar
       </a>
     </div>

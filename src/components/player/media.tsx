@@ -511,13 +511,20 @@ export function VideoCard({ soundOn, onRequestNext }: { soundOn: boolean; onRequ
         </Notice>
       ) : !begun ? (
         <>
-          <div className="scrim-bottom" />
+          <div className="scrim-bottom start-scrim" />
           <button type="button" className="big-play" aria-label={label} onClick={() => void start(resume ? time : 0)}>
             <Icon name="play_arrow" fill />
           </button>
-          <span className="start-label tnum">
-            {label} · {fmt(lesson.durationS)}
-          </span>
+          <div className="start-meta">
+            <span className="sm-over tnum">
+              <Icon name={lesson.kind === 'practice' ? 'self_improvement' : 'play_circle'} size={16} />
+              {lesson.kind === 'practice' ? 'Práctica guiada' : `Clase ${lesson.index + 1} de ${lesson.total}`} · {fmt(lesson.durationS)}
+            </span>
+            <b className="sm-title">{lesson.title}</b>
+            <button type="button" className={btn('primary', 'lg', 'sm-cta')} onClick={() => void start(resume ? time : 0)}>
+              <Icon name="play_arrow" fill /> {label}
+            </button>
+          </div>
         </>
       ) : (
         <div className="vov" data-idle={idle && st.playing}>
