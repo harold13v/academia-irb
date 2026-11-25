@@ -15,32 +15,43 @@ export const metadata: Metadata = { title: 'Inicio' };
 
 function Hero({ over, title, sub, href, cta, cover, value, meta, priority = true }: { over: string; title: string; sub: string; href: string; cta: string; cover: string | null; value?: number; meta: string; priority?: boolean }) {
   return (
-    <section className="hero-full glow-border" aria-labelledby="next-step">
-      <div className="hero-bg" aria-hidden="true">
-        <CoverArt title={sub} />
-        {cover && <Image src={cover} alt="" fill priority={priority} sizes="(min-width: 1024px) 1100px, 100vw" placeholder="blur" blurDataURL={BLUR} />}
-      </div>
-      <div className="hero-copy">
-        <p className="t-overline c-primary">{over}</p>
+    <section className="hx" aria-labelledby="next-step">
+      {cover && (
+        <div className="hx-ambient" aria-hidden="true">
+          <Image src={cover} alt="" fill sizes="96px" quality={30} />
+        </div>
+      )}
+      <div className="hx-copy">
+        <p className="hx-over">
+          <span className="hx-dot" aria-hidden="true" />
+          {over}
+        </p>
         <h2 id="next-step" className="hero-title">
           {title}
         </h2>
-        <p className="t-body-m c-variant">{sub}</p>
+        <p className="hx-sub">{sub}</p>
         {value !== undefined && (
-          <div className="row-c" style={{ gap: 12 }}>
-            <div style={{ flex: 1, maxWidth: 280 }}>
-              <Progress value={value} label="Avance del curso" />
-            </div>
-            <span className="t-label-m c-variant tnum">{Math.round(value * 100)}%</span>
+          <div className="hx-progress">
+            <Progress value={value} label="Avance del curso" kind="goal" />
+            <span className="tnum">{Math.round(value * 100)}%</span>
           </div>
         )}
-        <div className="row-c" style={{ gap: 16, marginTop: 4, flexWrap: 'wrap' }}>
+        <div className="hx-actions">
           <Link className={btn('primary', 'lg')} href={href}>
             <Icon name="play_arrow" fill /> {cta}
           </Link>
-          <span className="t-label-m c-variant tnum">{meta}</span>
+          <span className="hx-meta tnum">
+            <Icon name="schedule" size={16} /> {meta}
+          </span>
         </div>
       </div>
+      <Link href={href} className="hx-art" tabIndex={-1} aria-hidden="true">
+        <CoverArt title={sub} />
+        {cover && <Image src={cover} alt="" fill priority={priority} sizes="(min-width: 1024px) 560px, 100vw" placeholder="blur" blurDataURL={BLUR} />}
+        <span className="hx-play">
+          <Icon name="play_arrow" fill size={28} />
+        </span>
+      </Link>
     </section>
   );
 }
@@ -50,7 +61,7 @@ function GoalCard({ c, modules, active }: { c: MyCourse; modules: number; active
   const pct = c.done / Math.max(1, c.total);
   const href = c.lastLessonSlug && c.done < c.total ? `/cursos/${c.slug}/${c.lastLessonSlug}` : `/cursos/${c.slug}`;
   return (
-    <div className={program ? 'stacked' : undefined}>
+    <div>
       <Link href={href} className={`card interactive goal-card${active ? ' glow-border' : ''}`}>
         <span className="cover-16x9"><CoverArt title={c.title} small />{c.cover && <Image src={c.cover} alt="" fill sizes="(min-width: 768px) 176px, 96px" placeholder="blur" blurDataURL={BLUR} />}</span>
         <span className="stack" style={{ gap: 6, minWidth: 0 }}>

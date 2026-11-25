@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import { useId, type CSSProperties, type ReactNode } from 'react';
 
 /** Material Symbols Rounded (subconjunto local, 20px, peso 400). `fill` para el estado activo. */
 export function Icon({ name, fill, size, className = '', style, label }: { name: string; fill?: boolean; size?: number; className?: string; style?: CSSProperties; label?: string }) {
@@ -85,16 +85,18 @@ const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >
 
 /** Isotipo IRB (loto de tres pétalos en degradado azafrán→índigo). */
 export function Isotype({ size = 28 }: { size?: number }) {
+  // id único por instancia: con un id fijo, si la primera copia del SVG está oculta (sidebar en móvil) el degradado no pinta en las demás
+  const gid = `irb-iso-${useId().replace(/:/g, '')}`;
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
       <defs>
-        <linearGradient id="irb-iso" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#f5b73b" />
           <stop offset="1" stopColor="#9ea3ff" />
         </linearGradient>
       </defs>
       <rect width="32" height="32" rx="9" fill="#30357d" />
-      <g fill="url(#irb-iso)">
+      <g fill={`url(#${gid})`}>
         <path d="M16 6c3 4 4 8 0 15-4-7-3-11 0-15z" />
         <path d="M7 12c4.5 1 7.5 4 8 10-6-1.5-8.5-5-8-10z" opacity=".85" />
         <path d="M25 12c-4.5 1-7.5 4-8 10 6-1.5 8.5-5 8-10z" opacity=".85" />
@@ -107,12 +109,21 @@ export function Isotype({ size = 28 }: { size?: number }) {
 /** Portada generada (degradado índigo→violeta por hash + título + isotipo). Va debajo de la imagen real: si falta o falla, se ve esta. */
 export function CoverArt({ title, small }: { title: string; small?: boolean }) {
   const h = hash(title);
-  const a = 232 + (h % 40);
-  const b = 262 + ((h >> 5) % 50);
-  const ang = 120 + ((h >> 9) % 90);
+  // siempre dentro de la familia índigo: el tono varía poco, lo que cambia es dónde cae la luz
+  const hue = 236 + (h % 22);
+  const lx = 15 + ((h >> 4) % 70);
+  const ly = 10 + ((h >> 8) % 40);
+  const style = {
+    '--cv-hue': hue,
+    '--cv-lx': `${lx}%`,
+    '--cv-ly': `${ly}%`,
+  } as CSSProperties;
   return (
-    <span className="cover-art" aria-hidden="true" style={{ background: `radial-gradient(120% 90% at 100% 0%, hsl(${b} 70% 62% / .45), transparent 60%), linear-gradient(${ang}deg, hsl(${a} 55% 22%), hsl(${b} 52% 38%))` }}>
-      <Isotype size={small ? 14 : 24} />
+    <span className={`cover-art${small ? ' sm' : ''}`} aria-hidden="true" style={style}>
+      <span className="cv-rings" />
+      <span className="cv-mark">
+        <Isotype size={small ? 16 : 28} />
+      </span>
       {!small && <b>{title}</b>}
     </span>
   );

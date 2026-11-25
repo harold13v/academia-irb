@@ -1,0 +1,351 @@
+
+/* ═══════════════ v3 · refinamiento visual ═══════════════
+ * Principios: la imagen nunca va detrás del texto (las portadas traen letras propias),
+ * la luz sale de la portada (ambient), el azafrán solo en acción y estado,
+ * profundidad con hairline + highlight + sombra, nunca con bordes grises. */
+
+:root {
+  --irb-ink: #0b0c22;
+  --irb-ring: rgb(185 178 255 / 0.14);
+}
+
+/* fondo: menos aurora, más profundidad. Una sola luz índigo arriba y viñeta abajo */
+body {
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgb(91 80 230 / 0.22), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgb(245 183 59 / 0.05), transparent 60%),
+    linear-gradient(180deg, var(--sin-surface) 0%, #0f1026 100%);
+  background-attachment: fixed;
+}
+body::after {
+  opacity: 0.025;
+}
+
+/* ───────── portada generada ───────── */
+.cover-art {
+  background:
+    radial-gradient(70% 90% at var(--cv-lx) var(--cv-ly), hsl(calc(var(--cv-hue) + 18) 80% 72% / 0.35), transparent 60%),
+    radial-gradient(60% 60% at 100% 100%, rgb(245 183 59 / 0.16), transparent 65%),
+    linear-gradient(155deg, hsl(var(--cv-hue) 48% 20%), hsl(calc(var(--cv-hue) + 10) 46% 12%));
+  color: #fff;
+  padding: 8%;
+  justify-content: flex-end;
+}
+.cover-art .cv-rings {
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(circle at var(--cv-lx) var(--cv-ly), transparent 0 18px, var(--irb-ring) 18px 19px);
+  -webkit-mask: radial-gradient(70% 80% at var(--cv-lx) var(--cv-ly), #000 10%, transparent 70%);
+  mask: radial-gradient(70% 80% at var(--cv-lx) var(--cv-ly), #000 10%, transparent 70%);
+  opacity: 0.9;
+}
+.cover-art.sm .cv-rings {
+  background: repeating-radial-gradient(circle at var(--cv-lx) var(--cv-ly), transparent 0 7px, var(--irb-ring) 7px 8px);
+}
+.cover-art .cv-mark {
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  opacity: 0.95;
+  filter: drop-shadow(0 4px 12px rgb(0 0 0 / 0.4));
+}
+.cover-art.sm .cv-mark {
+  top: auto;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+}
+.cover-art b {
+  position: relative;
+  text-shadow: 0 2px 16px rgb(0 0 0 / 0.45);
+}
+
+/* ───────── hero "Siguiente paso": texto + obra enmarcada ───────── */
+.hx {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 20px;
+  padding: 16px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.04), transparent 40%),
+    color-mix(in srgb, var(--sin-surface-container-low) 80%, transparent);
+  box-shadow: var(--irb-hairline), var(--irb-highlight), var(--irb-elev-2);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+@media (min-width: 900px) {
+  .hx {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: 40px;
+    padding: 24px 24px 24px 40px;
+  }
+}
+.hx-ambient {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  filter: blur(70px) saturate(1.5);
+  opacity: 0.45;
+  pointer-events: none;
+}
+.hx-ambient img {
+  object-fit: cover;
+}
+.hx::before {
+  /* velo para que la luz de la portada tiña sin ensuciar el texto */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(18 19 43 / 0.35) 0%, rgb(18 19 43 / 0.85) 55%, rgb(18 19 43 / 0.92) 100%);
+}
+@media (min-width: 900px) {
+  .hx::before {
+    background: linear-gradient(90deg, rgb(18 19 43 / 0.85) 0%, rgb(18 19 43 / 0.6) 55%, rgb(18 19 43 / 0.25) 100%);
+  }
+}
+.hx-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  order: 2;
+}
+@media (min-width: 900px) {
+  .hx-copy {
+    order: 0;
+  }
+}
+.hx-over {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 13px/16px var(--font-jakarta);
+  color: var(--sin-primary);
+}
+.hx-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sin-primary);
+  box-shadow: 0 0 0 4px rgb(245 183 59 / 0.18), 0 0 16px rgb(245 183 59 / 0.8);
+}
+.hx .hero-title {
+  font: 700 32px/38px var(--font-bricolage);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+@media (min-width: 1280px) {
+  .hx .hero-title {
+    font-size: 44px;
+    line-height: 50px;
+  }
+}
+.hx-sub {
+  font: 500 16px/24px var(--font-jakarta);
+  color: var(--sin-on-surface-variant);
+}
+.hx-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 360px;
+  margin-top: 4px;
+}
+.hx-progress .progress {
+  flex: 1;
+}
+.hx-progress > span {
+  font: 600 13px/1 var(--font-jakarta);
+  color: var(--sin-on-surface);
+}
+.hx-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+.hx-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 13px/16px var(--font-jakarta);
+  color: var(--sin-on-surface-variant);
+}
+.hx-art {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  container-type: inline-size;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12), 0 30px 60px -20px rgb(4 5 18 / 0.9), 0 0 0 1px rgb(0 0 0 / 0.3);
+  transform: translateZ(0);
+}
+.hx-art img {
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-expo);
+  z-index: 1;
+}
+.hx:hover .hx-art img {
+  transform: scale(1.04);
+}
+.hx-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent 55%, rgb(9 10 28 / 0.55));
+  pointer-events: none;
+}
+.hx-play {
+  position: absolute;
+  z-index: 3;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--sin-on-primary);
+  background: var(--sin-primary);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 10px 30px -6px rgb(245 183 59 / 0.7);
+  transition: transform 0.4s var(--ease-expo);
+}
+.hx:hover .hx-play {
+  transform: scale(1.08);
+}
+
+/* ───────── objetivos ───────── */
+.stacked::before,
+.stacked::after {
+  display: none;
+}
+.goals {
+  gap: 12px;
+}
+.goal-card {
+  border-radius: 20px;
+}
+@media (min-width: 768px) {
+  .goal-card {
+    grid-template-columns: 200px minmax(0, 1fr) auto;
+    padding: 12px 20px 12px 12px;
+  }
+}
+.goal-card .cover-16x9 {
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+}
+.goal-card .cover-16x9 img {
+  z-index: 1;
+}
+.goal-card .t-card {
+  font-size: 17px;
+  line-height: 24px;
+}
+.section-h {
+  margin-top: 8px;
+}
+.section-h .t-modal,
+.section-title {
+  font: 700 22px/28px var(--font-bricolage);
+  letter-spacing: -0.025em;
+}
+
+/* barras: pista con relieve y relleno con brillo */
+.progress {
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 0.35);
+}
+.progress > span {
+  background: linear-gradient(90deg, var(--sin-primary-fixed-dim), var(--sin-primary) 60%, var(--sin-primary-fixed));
+  box-shadow: 0 0 12px rgb(245 183 59 / 0.45);
+}
+.progress.goal {
+  height: 6px;
+}
+
+/* ───────── reproductor: el póster nunca compite con un aviso ───────── */
+.vcard:has(.dev-notice) .poster img {
+  filter: blur(22px) brightness(0.42) saturate(1.3);
+  transform: scale(1.12);
+}
+.dev-notice .card.glass {
+  border-radius: 20px;
+  padding: 24px 28px;
+  gap: 10px;
+  background: rgb(18 19 43 / 0.62);
+  box-shadow: var(--irb-hairline), var(--irb-highlight), var(--irb-elev-2);
+}
+@supports (backdrop-filter: blur(12px)) {
+  html:not(.no-blur) .dev-notice .card.glass {
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  }
+}
+.dev-notice .card .ms {
+  color: var(--sin-primary);
+}
+
+/* ───────── marca ───────── */
+.sb-logo .t-card,
+.sb-logo .sb-label {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-art img,
+  .hx-play {
+    transition: none;
+  }
+}
+
+/* ───────── perfil: ritmo vertical y semana con presencia ───────── */
+.page-pad > section + section,
+.page-pad section {
+  margin-top: 40px;
+}
+.page-pad > section:first-of-type {
+  margin-top: 32px;
+}
+.week {
+  justify-content: space-between;
+  max-width: 520px;
+}
+.week-dot {
+  width: 40px;
+  height: 40px;
+  border-width: 1.5px;
+  background: rgb(255 255 255 / 0.03);
+  transition: transform 0.3s var(--ease-expo);
+}
+.week-dot.done {
+  background: radial-gradient(circle at 35% 30%, var(--sin-primary-fixed), var(--sin-primary) 60%, var(--sin-primary-fixed-dim));
+}
+.week-link {
+  margin-top: 19px;
+  max-width: none;
+  height: 1.5px;
+}
+.week-day {
+  gap: 8px;
+  font-size: 12px;
+}
+.stat {
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--irb-hairline), var(--irb-highlight), var(--irb-elev-1);
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--tint, var(--sin-secondary)) 18%, transparent), transparent 60%),
+    color-mix(in srgb, var(--sin-surface-container) 88%, transparent);
+}
+.stat b {
+  font-size: 44px;
+  line-height: 52px;
+}
