@@ -1,6 +1,6 @@
 # Academia IRB®
 
-Plataforma de cursos y prácticas guiadas de IRB® (reemplazo de LearnDash). UI con el sistema visual **Sinapsis** en tema oscuro índigo/azafrán.
+Plataforma de cursos y prácticas guiadas de IRB® (reemplazo de LearnDash), desplegada en staging desde `main`. UI con el sistema visual **Sinapsis** en tema oscuro índigo/azafrán.
 
 - **Web:** Next.js 15 (App Router) · React 19 · TypeScript estricto · Tailwind v4 · Radix · Motion · TanStack Query.
 - **Datos:** Postgres 16 + Drizzle (migraciones solo aditivas) · Redis 7 (caché, rate limit, presencia, colas BullMQ).
