@@ -1,0 +1,43 @@
+# dependencias y builds
+node_modules/
+.next/
+dist/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# entorno y secretos (nunca al repo)
+.env*
+!.env.example
+*.pem
+*.key
+
+# PWA generado en el build
+public/sw.js
+public/swe-worker*
+
+# datos reales, volcados y respaldos
+data/
+dumps/
+backups/
+uploads/
+export/
+*.sql
+!drizzle/*.sql
+*.sql.gz
+*.dump
+*.xml
+wordpress*/
+wp-content/
+
+# documentación interna y QA
+docs/capturas/
+docs/lighthouse/
+docs/FASE0-informe.md
+test-results/
+playwright-report/
+
+# logs y sistema
+logs/
+*.log
+.DS_Store
