@@ -13,7 +13,7 @@
 body {
   background:
     radial-gradient(1200px 600px at 20% -10%, rgb(91 80 230 / 0.22), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgb(245 183 59 / 0.05), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgb(214 178 122 / 0.05), transparent 60%),
     linear-gradient(180deg, var(--sin-surface) 0%, #0f1026 100%);
   background-attachment: fixed;
 }
@@ -25,7 +25,7 @@ body::after {
 .cover-art {
   background:
     radial-gradient(70% 90% at var(--cv-lx) var(--cv-ly), hsl(calc(var(--cv-hue) + 18) 80% 72% / 0.35), transparent 60%),
-    radial-gradient(60% 60% at 100% 100%, rgb(245 183 59 / 0.16), transparent 65%),
+    radial-gradient(60% 60% at 100% 100%, rgb(214 178 122 / 0.16), transparent 65%),
     linear-gradient(155deg, hsl(var(--cv-hue) 48% 20%), hsl(calc(var(--cv-hue) + 10) 46% 12%));
   color: #fff;
   padding: 8%;
@@ -100,11 +100,11 @@ body::after {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgb(18 19 43 / 0.35) 0%, rgb(18 19 43 / 0.85) 55%, rgb(18 19 43 / 0.92) 100%);
+  background: linear-gradient(180deg, rgb(7 6 31 / 0.35) 0%, rgb(7 6 31 / 0.85) 55%, rgb(7 6 31 / 0.92) 100%);
 }
 @media (min-width: 900px) {
   .hx::before {
-    background: linear-gradient(90deg, rgb(18 19 43 / 0.85) 0%, rgb(18 19 43 / 0.6) 55%, rgb(18 19 43 / 0.25) 100%);
+    background: linear-gradient(90deg, rgb(7 6 31 / 0.85) 0%, rgb(7 6 31 / 0.6) 55%, rgb(7 6 31 / 0.25) 100%);
   }
 }
 .hx-copy {
@@ -123,7 +123,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 600 13px/16px var(--font-jakarta);
+  font: 600 13px/16px var(--font-text);
   color: var(--sin-primary);
 }
 .hx-dot {
@@ -131,10 +131,10 @@ body::after {
   height: 8px;
   border-radius: 50%;
   background: var(--sin-primary);
-  box-shadow: 0 0 0 4px rgb(245 183 59 / 0.18), 0 0 16px rgb(245 183 59 / 0.8);
+  box-shadow: 0 0 0 4px rgb(214 178 122 / 0.18), 0 0 16px rgb(214 178 122 / 0.8);
 }
 .hx .hero-title {
-  font: 700 32px/38px var(--font-bricolage);
+  font: 700 32px/38px var(--font-serif);
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
@@ -145,7 +145,7 @@ body::after {
   }
 }
 .hx-sub {
-  font: 500 16px/24px var(--font-jakarta);
+  font: 500 16px/24px var(--font-text);
   color: var(--sin-on-surface-variant);
 }
 .hx-progress {
@@ -159,7 +159,7 @@ body::after {
   flex: 1;
 }
 .hx-progress > span {
-  font: 600 13px/1 var(--font-jakarta);
+  font: 600 13px/1 var(--font-text);
   color: var(--sin-on-surface);
 }
 .hx-actions {
@@ -173,7 +173,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font: 500 13px/16px var(--font-jakarta);
+  font: 500 13px/16px var(--font-text);
   color: var(--sin-on-surface-variant);
 }
 .hx-art {
@@ -198,7 +198,7 @@ body::after {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(180deg, transparent 55%, rgb(9 10 28 / 0.55));
+  background: linear-gradient(180deg, transparent 55%, rgb(3 2 18 / 0.55));
   pointer-events: none;
 }
 .hx-play {
@@ -213,7 +213,7 @@ body::after {
   place-items: center;
   color: var(--sin-on-primary);
   background: var(--sin-primary);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 10px 30px -6px rgb(245 183 59 / 0.7);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 10px 30px -6px rgb(214 178 122 / 0.7);
   transition: transform 0.4s var(--ease-expo);
 }
 .hx:hover .hx-play {
@@ -253,7 +253,7 @@ body::after {
 }
 .section-h .t-modal,
 .section-title {
-  font: 700 22px/28px var(--font-bricolage);
+  font: 700 22px/28px var(--font-serif);
   letter-spacing: -0.025em;
 }
 
@@ -264,7 +264,7 @@ body::after {
 }
 .progress > span {
   background: linear-gradient(90deg, var(--sin-primary-fixed-dim), var(--sin-primary) 60%, var(--sin-primary-fixed));
-  box-shadow: 0 0 12px rgb(245 183 59 / 0.45);
+  box-shadow: 0 0 12px rgb(214 178 122 / 0.45);
 }
 .progress.goal {
   height: 6px;
@@ -279,7 +279,7 @@ body::after {
   border-radius: 20px;
   padding: 24px 28px;
   gap: 10px;
-  background: rgb(18 19 43 / 0.62);
+  background: rgb(7 6 31 / 0.62);
   box-shadow: var(--irb-hairline), var(--irb-highlight), var(--irb-elev-2);
 }
 @supports (backdrop-filter: blur(12px)) {
@@ -362,8 +362,8 @@ body::after {
 /* estado inicial: scrim más hondo para que el texto respire sobre cualquier póster */
 .start-scrim {
   background:
-    linear-gradient(180deg, rgb(9 10 28 / 0.25) 0%, transparent 30%),
-    linear-gradient(0deg, rgb(9 10 28 / 0.92) 0%, rgb(9 10 28 / 0.55) 30%, transparent 62%);
+    linear-gradient(180deg, rgb(3 2 18 / 0.25) 0%, transparent 30%),
+    linear-gradient(0deg, rgb(3 2 18 / 0.92) 0%, rgb(3 2 18 / 0.55) 30%, transparent 62%);
 }
 .start-label {
   display: none;
@@ -374,7 +374,7 @@ body::after {
   width: 84px;
   height: 84px;
   background: radial-gradient(circle at 35% 30%, var(--sin-primary-fixed), var(--sin-primary) 55%, var(--sin-primary-fixed-dim));
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), inset 0 -2px 6px rgb(120 70 0 / 0.35), 0 14px 40px -8px rgb(245 183 59 / 0.75);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), inset 0 -2px 6px rgb(120 70 0 / 0.35), 0 14px 40px -8px rgb(214 178 122 / 0.75);
   transition: transform 0.35s var(--ease-expo), box-shadow 0.35s var(--ease-expo);
 }
 .big-play::before,
@@ -383,7 +383,7 @@ body::after {
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  border: 1.5px solid rgb(245 183 59 / 0.55);
+  border: 1.5px solid rgb(214 178 122 / 0.55);
   animation: halo 2.6s var(--ease-expo) infinite;
   pointer-events: none;
 }
@@ -402,7 +402,7 @@ body::after {
 }
 .big-play:hover {
   transform: scale(1.06);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), inset 0 -2px 6px rgb(120 70 0 / 0.35), 0 18px 50px -6px rgb(245 183 59 / 0.9);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), inset 0 -2px 6px rgb(120 70 0 / 0.35), 0 18px 50px -6px rgb(214 178 122 / 0.9);
 }
 .big-play .ms {
   font-size: 40px;
@@ -431,9 +431,9 @@ body::after {
   height: 28px;
   padding: 0 12px;
   border-radius: 999px;
-  font: 600 12px/1 var(--font-jakarta);
+  font: 600 12px/1 var(--font-text);
   color: #fff;
-  background: rgb(18 19 43 / 0.55);
+  background: rgb(7 6 31 / 0.55);
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
 }
 @supports (backdrop-filter: blur(10px)) {
@@ -446,7 +446,7 @@ body::after {
   color: var(--sin-primary);
 }
 .sm-title {
-  font: 700 40px/44px var(--font-bricolage);
+  font: 700 40px/44px var(--font-serif);
   letter-spacing: -0.03em;
   color: #fff;
   text-shadow: 0 2px 24px rgb(0 0 0 / 0.55);
@@ -519,10 +519,10 @@ body::after {
   padding: 0 4px;
 }
 .cb-live b {
-  font: 700 13px/18px var(--font-jakarta);
+  font: 700 13px/18px var(--font-text);
 }
 .cb-live span span {
-  font: 500 12px/16px var(--font-jakarta);
+  font: 500 12px/16px var(--font-text);
   color: var(--sin-on-surface-variant);
 }
 .live-dot {
@@ -543,10 +543,10 @@ body::after {
   }
 }
 .btn.cta-glow {
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), 0 8px 28px -6px rgb(245 183 59 / 0.75);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), 0 8px 28px -6px rgb(214 178 122 / 0.75);
 }
 .btn.cta-glow:hover {
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), 0 12px 36px -6px rgb(245 183 59 / 0.95);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), 0 12px 36px -6px rgb(214 178 122 / 0.95);
 }
 
 /* panel derecho: cristal con borde de luz y texto más legible */
@@ -593,7 +593,7 @@ body::after {
   border-radius: 14px;
   background: rgb(255 255 255 / 0.035);
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
-  font: 500 15px/22px var(--font-jakarta);
+  font: 500 15px/22px var(--font-text);
   align-items: center;
   transition: background 0.2s, box-shadow 0.2s;
 }
@@ -625,14 +625,14 @@ body::after {
 .checklist input:checked {
   background: var(--sin-primary);
   border-color: var(--sin-primary);
-  box-shadow: 0 0 14px rgb(245 183 59 / 0.55);
+  box-shadow: 0 0 14px rgb(214 178 122 / 0.55);
 }
 .checklist input:checked::after {
   transform: rotate(45deg) translate(-1px, -1px) scale(1);
 }
 .checklist label:has(input:checked) {
-  background: rgb(245 183 59 / 0.07);
-  box-shadow: inset 0 0 0 1px rgb(245 183 59 / 0.25);
+  background: rgb(214 178 122 / 0.07);
+  box-shadow: inset 0 0 0 1px rgb(214 178 122 / 0.25);
 }
 .checklist label:has(input:checked) span {
   color: var(--sin-on-surface-variant);
@@ -649,16 +649,16 @@ body::after {
   padding: 20px;
   border-radius: 20px;
   background:
-    radial-gradient(120% 100% at 100% 0%, rgb(245 183 59 / 0.18), transparent 55%),
+    radial-gradient(120% 100% at 100% 0%, rgb(214 178 122 / 0.18), transparent 55%),
     radial-gradient(100% 100% at 0% 100%, rgb(109 99 255 / 0.3), transparent 60%),
     var(--sin-surface-container-high);
-  box-shadow: inset 0 0 0 1px rgb(245 183 59 / 0.25), var(--irb-elev-2);
+  box-shadow: inset 0 0 0 1px rgb(214 178 122 / 0.25), var(--irb-elev-2);
 }
 .fam-over {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 700 11px/16px var(--font-jakarta);
+  font: 700 11px/16px var(--font-text);
   text-transform: uppercase;
   letter-spacing: 1.2px;
   color: #ffb3ab;

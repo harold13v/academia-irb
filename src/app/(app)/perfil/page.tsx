@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Title } from '@/components/rayo/title';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -31,7 +32,7 @@ export default async function Profile() {
           <svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true">
             <defs>
               <linearGradient id="lvl" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#f5b73b" />
+                <stop offset="0" stopColor="#d6b27a" />
                 <stop offset="1" stopColor="#9ea3ff" />
               </linearGradient>
             </defs>
@@ -41,7 +42,7 @@ export default async function Profile() {
           <Avatar name={user.name} size={64} />
         </span>
         <div className="stack" style={{ gap: 4, minWidth: 0 }}>
-          <h1 className="t-page clamp1">{user.name}</h1>
+          <Title className="t-page" text={user.name} auto />
           <span className="row-c">
             <Tag tone="secondary" icon="spa">
               {stats.levelName}
@@ -70,7 +71,7 @@ export default async function Profile() {
 
       <section id="progreso" style={{ scrollMarginTop: 80 }}>
         <div className="section-h">
-          <h2 className="t-modal">Tu semana</h2>
+          <Title as="h2" className="t-modal" text="Tu" em="semana" />
           <PauseButton s={streak} />
         </div>
         <div className="card pad">
@@ -98,9 +99,7 @@ export default async function Profile() {
 
       <section aria-labelledby="hitos">
         <div className="section-h">
-          <h2 id="hitos" className="t-modal">
-            Hitos
-          </h2>
+          <Title as="h2" id="hitos" className="t-modal" text="Tus" em="hitos" />
           <span className="t-label-m c-variant">7 seguidos o 50 en total</span>
         </div>
         <div className="lotus-grid">
@@ -116,9 +115,7 @@ export default async function Profile() {
 
       <section aria-labelledby="camino">
         <div className="section-h">
-          <h2 id="camino" className="t-modal">
-            Etapas del camino
-          </h2>
+          <Title as="h2" id="camino" className="t-modal" text="Etapas del" em="camino" />
         </div>
         <div className="card" style={{ padding: 8 }}>
           <ol className="path">
@@ -138,7 +135,7 @@ export default async function Profile() {
 
       <section id="logros" style={{ scrollMarginTop: 80 }}>
         <div className="section-h">
-          <h2 className="t-modal">Logros</h2>
+          <Title as="h2" className="t-modal" text="Tus" em="logros" />
           <span className="t-label-m c-variant tnum">
             {earned.length} de {p.achievements.length}
           </span>
@@ -158,7 +155,7 @@ export default async function Profile() {
 
       <section id="certificados" style={{ scrollMarginTop: 80 }}>
         <div className="section-h">
-          <h2 className="t-modal">Certificados</h2>
+          <Title as="h2" className="t-modal" text="Tus" em="certificados" />
         </div>
         {certs.length ? (
           <div className="goals">
@@ -187,7 +184,7 @@ export default async function Profile() {
 
       <section id="ajustes" style={{ scrollMarginTop: 80 }}>
         <div className="section-h">
-          <h2 className="t-modal">Ajustes</h2>
+          <Title as="h2" className="t-modal" text="Ajustes" />
         </div>
         <Settings reminderHour={user.reminderHour ?? null} sound={user.soundOn} goal={user.dailyGoalMin} circles={user.circlesOptIn} />
         <form action={signOut} style={{ marginTop: 24 }}>

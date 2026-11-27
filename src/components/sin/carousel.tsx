@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { BLUR } from '@/lib/blur';
 import { fmt } from '@/lib/fmt';
 import type { ContinueItem } from '@/server/home';
+import { Title } from '../rayo/title';
 import { CoverArt, Icon, Progress } from './ui';
 
 /** "Continúa aprendiendo": carrusel Embla con miniaturas 16:9, progreso de 2px y botones de paso. */
@@ -20,9 +21,9 @@ export function ContinueCarousel({ items }: { items: ContinueItem[] }) {
     api.on('select', update).on('reInit', update).on('scroll', update);
   }, [api, update]);
   return (
-    <section aria-label="Continúa aprendiendo">
+    <section aria-label="Continúa aprendiendo" className="reveal">
       <div className="section-h">
-        <h2 className="t-modal">Continúa aprendiendo</h2>
+        <Title as="h2" className="t-modal" text="Continúa" em="aprendiendo" />
         <div className="row-c hide-sm">
           <button type="button" className="btn tertiary icon" aria-label="Anterior" disabled={!can.prev} onClick={() => api?.scrollPrev()}>
             <Icon name="chevron_left" />
@@ -45,7 +46,7 @@ export function ContinueCarousel({ items }: { items: ContinueItem[] }) {
                 <span className="dur tnum">{fmt(Math.max(0, c.durationS - c.positionS))}</span>
                 <Progress value={c.positionS / Math.max(1, c.durationS)} kind="thumb" />
               </div>
-              <p className="t-label-l clamp2" style={{ marginTop: 8 }}>
+              <p className="slide-title clamp2" style={{ marginTop: 12 }}>
                 {c.title}
               </p>
               <p className="t-label-s c-variant clamp1">{c.course}</p>

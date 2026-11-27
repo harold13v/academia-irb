@@ -6,6 +6,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { BLUR } from '@/lib/blur';
 import { fmt } from '@/lib/fmt';
 import { track } from '@/server/actions';
+import { Corners } from '../rayo/corners';
+import { Title } from '../rayo/title';
 import { Icon, Tag, btn } from '../sin/ui';
 import { lsPut, useLessonCtx, type LessonData } from '../lesson/context';
 import { EndScreen } from './endscreen';
@@ -512,6 +514,7 @@ export function VideoCard({ soundOn, onRequestNext }: { soundOn: boolean; onRequ
       ) : !begun ? (
         <>
           <div className="scrim-bottom start-scrim" />
+          <Corners />
           <button type="button" className="big-play" aria-label={label} onClick={() => void start(resume ? time : 0)}>
             <Icon name="play_arrow" fill />
           </button>
@@ -520,7 +523,7 @@ export function VideoCard({ soundOn, onRequestNext }: { soundOn: boolean; onRequ
               <Icon name={lesson.kind === 'practice' ? 'self_improvement' : 'play_circle'} size={16} />
               {lesson.kind === 'practice' ? 'Práctica guiada' : `Clase ${lesson.index + 1} de ${lesson.total}`} · {fmt(lesson.durationS)}
             </span>
-            <b className="sm-title">{lesson.title}</b>
+            <Title as="b" className="sm-title" text={lesson.title} auto />
             <button type="button" className={btn('primary', 'lg', 'sm-cta')} onClick={() => void start(resume ? time : 0)}>
               <Icon name="play_arrow" fill /> {label}
             </button>
@@ -577,7 +580,7 @@ export function VideoCard({ soundOn, onRequestNext }: { soundOn: boolean; onRequ
               )}
               {st.rateOk && (
                 <Menu.Root>
-                  <Menu.Trigger className="pbtn tnum" aria-label={`Velocidad ${st.rate}x`} style={{ width: 'auto', padding: '0 10px', borderRadius: 18, font: '600 13px/1 var(--font-jakarta)' }}>
+                  <Menu.Trigger className="pbtn tnum" aria-label={`Velocidad ${st.rate}x`} style={{ width: 'auto', padding: '0 10px', borderRadius: 18, font: '600 13px/1 var(--font-text)' }}>
                     {st.rate}x
                   </Menu.Trigger>
                   <Menu.Portal container={fs ? wrap.current : undefined}>

@@ -6,7 +6,8 @@ test('kiosco de Fuegos: sin salidas internas y el resto de rutas devuelve a /fue
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => m.type() === 'error' && !/vimeo/i.test(m.text()) && errors.push(m.text()));
   await page.goto('/fuegos?utm_source=qa');
-  await expect(page.locator('.big-play, .dev-notice').first()).toBeVisible();
+  // en escritorio el play central cede su lugar al CTA del bloque de título (.sm-cta)
+  await expect(page.locator('.big-play, .sm-cta, .dev-notice').filter({ visible: true }).first()).toBeVisible();
   const hrefs = await page.locator('a[href]').evaluateAll((as) => as.map((a) => (a as HTMLAnchorElement).href));
   const internal = hrefs.filter((h) => new URL(h).origin === new URL(page.url()).origin && !new URL(h).pathname.startsWith('/fuegos'));
   expect(internal, internal.join('\n')).toEqual([]);

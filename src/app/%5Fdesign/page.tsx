@@ -68,11 +68,11 @@ export default function DesignSystem() {
   return (
     <div className="page-pad" style={{ maxWidth: 1080 }}>
       <p className="t-overline c-variant" style={{ marginTop: 24 }}>
-        Sinapsis · irb-dark
+        Rayo · irb-dark
       </p>
       <h1 className="t-display">Sistema visual IRB®</h1>
       <p className="t-body-l c-variant" style={{ marginTop: 8, maxWidth: 680 }}>
-        Lenguaje de Sinapsis recoloreado: el índigo es todo lo que se ve; el azafrán es lo que se hace. Componentes reales con datos de ejemplo.
+        Lenguaje de irbximena.com/v2 sobre la estructura de Sinapsis: noche índigo con el rayo de fondo, Bodoni Moda + Hanken Grotesk, crema para las acciones, oro para el acento y el espectro de los 8 colores del logo para estado y progreso. Componentes reales con datos de ejemplo.
       </p>
 
       <Section title="Roles de color">
@@ -113,11 +113,11 @@ export default function DesignSystem() {
 
       <Section title="Tipografía">
         <div className="stack" style={{ gap: 12 }}>
-          <span className="t-display">Display 40/48 · Bricolage</span>
+          <span className="t-display">Display · Bodoni Moda</span>
           <span className="t-page">Título de página 24/32</span>
           <span className="t-modal">Modal 20/28</span>
           <span className="t-card">Tarjeta 16/24</span>
-          <span className="t-body-l">Body L 16/24 · Plus Jakarta Sans</span>
+          <span className="t-body-l">Body L 16/24 · Hanken Grotesk</span>
           <span className="t-body-m">Body M 14/24</span>
           <span className="t-label-l">Label L 14/20</span>
           <span className="t-label-m">Label M 12/16</span>
@@ -126,7 +126,7 @@ export default function DesignSystem() {
         </div>
       </Section>
 
-      <Section title="Botones píldora">
+      <Section title="Botones">
         {(['sm', 'md', 'lg'] as const).map((s) => (
           <div key={s} className="row-c" style={{ flexWrap: 'wrap', gap: 12, marginBottom: 12 }}>
             {VARIANTS.map((v) => (
@@ -206,7 +206,7 @@ export default function DesignSystem() {
             <StreakCopy s={streak()} />
           </div>
           <div className="card pad">
-            <p className="t-label-l">En riesgo (terracota)</p>
+            <p className="t-label-l">En riesgo (oro)</p>
             <WeekRow s={riskWeek} />
             <StreakCopy s={riskWeek} />
           </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Eyebrow, Title } from '@/components/rayo/title';
 import Link from 'next/link';
 import { CirclePanel } from '@/components/circle';
 import { btn } from '@/components/sin/ui';
@@ -11,9 +12,10 @@ export default async function Circles() {
   const user = await currentUser();
   return (
     <div className="page-pad" style={{ maxWidth: 760 }}>
-      <h1 className="t-page" style={{ margin: '8px 0 24px' }}>
-        Círculos
-      </h1>
+      <div className="stack" style={{ gap: 12, margin: '8px 0 32px' }}>
+        <Eyebrow>Practicar acompañada</Eyebrow>
+        <Title className="t-page" text="Tus" em="círculos." />
+      </div>
       {user ? (
         <CirclePanel optedIn={user.circlesOptIn} today={await circleToday(user.id, user.timezone)} />
       ) : (

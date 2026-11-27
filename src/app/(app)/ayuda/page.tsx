@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Eyebrow, Title } from '@/components/rayo/title';
 import { Icon } from '@/components/sin/ui';
 
 export const metadata: Metadata = { title: 'Ayuda' };
@@ -14,9 +15,10 @@ const QA: [string, string][] = [
 export default function Help() {
   return (
     <div className="page-pad" style={{ maxWidth: 760 }}>
-      <h1 className="t-page" style={{ margin: '8px 0 24px' }}>
-        Ayuda
-      </h1>
+      <div className="stack" style={{ gap: 12, margin: '8px 0 32px' }}>
+        <Eyebrow>Estamos contigo</Eyebrow>
+        <Title className="t-page" text="¿En qué te" em="ayudamos?" />
+      </div>
       <div className="card" style={{ padding: 8 }}>
         {QA.map(([q, a]) => (
           <details key={q} className="pref-row" style={{ display: 'block', padding: '4px 8px' }}>

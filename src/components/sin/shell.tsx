@@ -96,10 +96,13 @@ function Sidebar({ initialCollapsed }: { initialCollapsed: boolean }) {
   );
   return (
     <aside className="sidebar" data-collapsed={collapsed} aria-label="Navegación principal">
-      <div className="sb-logo">
-        <Isotype size={28} />
-        <span className="sb-label t-card">Academia IRB®</span>
-      </div>
+      <Link href="/" className="sb-logo" aria-label="Academia IRB® · inicio">
+        <span className="sb-iso">
+          <Isotype size={32} />
+        </span>
+        <img className="sb-brand" src="/brand/irb-ximena.png" alt="IRB® Ximena Duque Valencia" width={150} height={26} />
+        <span className="sb-sub">Academia</span>
+      </Link>
       <nav className="sb-nav">
         {NAV.map(item)}
         <p className="sb-overline t-overline">Tu camino</p>
@@ -181,7 +184,7 @@ export function TopBar() {
     <header className="topbar" data-scrolled={scrolled}>
       <Link href="/" className="topbar-brand" aria-label="Inicio">
         <Isotype size={28} />
-        Academia
+        <em className="r-em">Academia</em>
       </Link>
       <div className="topbar-search">
         <button type="button" className="search-trigger" onClick={shell.openSearch} aria-label="Buscar cursos, clases y prácticas" aria-keyshortcuts="Meta+K Control+K">

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Syllabus } from '@/components/sin/syllabus';
 import { Enter } from '@/components/sin/motion';
+import { Corners } from '@/components/rayo/corners';
+import { Eyebrow, Title } from '@/components/rayo/title';
 import { CoverArt, Icon, Progress, Tag, btn } from '@/components/sin/ui';
 import { BLUR } from '@/lib/blur';
 import { fmt } from '@/lib/fmt';
@@ -52,18 +54,21 @@ export default async function CoursePage({ params }: { params: P }) {
               <Image src={o.cover} alt="" fill sizes="48px" quality={30} />
             </span>
           )}
-          <div className="cover-16x9 glow-border" style={{ borderRadius: 'var(--radius-4xl)', boxShadow: 'var(--irb-elev-2)' }}>
+          <div className="cover-16x9 glow-border" style={{ boxShadow: 'var(--irb-elev-2)' }} data-cursor={access ? 'Play' : 'Ver'}>
             <CoverArt title={o.title} />
+            <Corners />
             {o.cover && <Image src={o.cover} alt="" fill priority sizes="(min-width: 900px) 560px, 100vw" placeholder="blur" blurDataURL={BLUR} />}
           </div>
         </div>
         <div className="stack" style={{ gap: 12 }}>
-          <div className="row-c">
-            <Tag tone={o.modules.length >= 3 ? 'secondary' : undefined}>{o.modules.length >= 3 ? 'Programa' : 'Curso'}</Tag>
-            {!access && <Tag icon="lock">No está en tu cuenta</Tag>}
-          </div>
-          <h1 className="t-display">{o.title}</h1>
-          {o.subtitle && <p className="t-body-l c-variant">{o.subtitle}</p>}
+          <Eyebrow>{o.modules.length >= 3 ? `Programa en ${o.modules.length} módulos` : 'Curso IRB®'}</Eyebrow>
+          <Title className="t-display" text={o.title} auto />
+          {!access && (
+            <div className="row-c">
+              <Tag icon="lock">No está en tu cuenta</Tag>
+            </div>
+          )}
+          {o.subtitle && <p className="t-body-l c-variant" style={{ fontSize: 18, lineHeight: '28px' }}>{o.subtitle}</p>}
           <div className="pills tnum">
             <span>
               <Icon name="smart_display" /> {o.count} clases
@@ -98,16 +103,14 @@ export default async function CoursePage({ params }: { params: P }) {
         </div>
       </div>
       {o.description && (
-        <section style={{ marginTop: 40, maxWidth: 720 }}>
-          <h2 className="t-modal">Sobre este curso</h2>
+        <section className="reveal" style={{ marginTop: 56, maxWidth: 720 }}>
+          <Title as="h2" className="t-modal" text="Sobre este" em="curso" style={{ fontSize: 30 }} />
           <div className="prose-irb" style={{ marginTop: 8 }} dangerouslySetInnerHTML={{ __html: o.description }} />
         </section>
       )}
-      <section style={{ marginTop: 40 }} aria-labelledby="temario">
-        <div className="section-h" style={{ marginTop: 0 }}>
-          <h2 id="temario" className="t-modal">
-            Temario
-          </h2>
+      <section className="reveal" style={{ marginTop: 40 }} aria-labelledby="temario">
+        <div className="section-h">
+          <Title as="h2" id="temario" className="t-modal" text="El" em="temario" />
           <span className="t-label-m c-variant tnum">
             {o.count} clases · {fmt(o.totalS)}
           </span>

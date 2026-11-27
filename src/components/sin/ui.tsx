@@ -1,4 +1,5 @@
 import { useId, type CSSProperties, type ReactNode } from 'react';
+import { GenCover } from '../rayo/cover';
 
 /** Material Symbols Rounded (subconjunto local, 20px, peso 400). `fill` para el estado activo. */
 export function Icon({ name, fill, size, className = '', style, label }: { name: string; fill?: boolean; size?: number; className?: string; style?: CSSProperties; label?: string }) {
@@ -81,52 +82,36 @@ export function Lotus({ tone = 'primary', size = 56 }: { tone?: 'primary' | 'sec
   );
 }
 
-const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
-
-/** Isotipo IRB (loto de tres pétalos en degradado azafrán→índigo). */
+/** Isotipo IRB: el rayo de v2 — un haz con los 8 colores del logo atravesando un anillo, sobre noche índigo. */
 export function Isotype({ size = 28 }: { size?: number }) {
   // id único por instancia: con un id fijo, si la primera copia del SVG está oculta (sidebar en móvil) el degradado no pinta en las demás
   const gid = `irb-iso-${useId().replace(/:/g, '')}`;
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="isotype">
       <defs>
-        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f5b73b" />
-          <stop offset="1" stopColor="#9ea3ff" />
+        <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
+          {['#7A6CF0', '#E2574E', '#FF4A3D', '#FFD141', '#8BD336', '#3D8BFF', '#A35BD9', '#F196CE'].map((c, i) => (
+            <stop key={c} offset={i / 7} stopColor={c} />
+          ))}
         </linearGradient>
+        <radialGradient id={`${gid}g`}>
+          <stop offset="0" stopColor="#fff" stopOpacity=".9" />
+          <stop offset="1" stopColor="#7A6CF0" stopOpacity="0" />
+        </radialGradient>
       </defs>
-      <rect width="32" height="32" rx="9" fill="#30357d" />
-      <g fill={`url(#${gid})`}>
-        <path d="M16 6c3 4 4 8 0 15-4-7-3-11 0-15z" />
-        <path d="M7 12c4.5 1 7.5 4 8 10-6-1.5-8.5-5-8-10z" opacity=".85" />
-        <path d="M25 12c-4.5 1-7.5 4-8 10 6-1.5 8.5-5 8-10z" opacity=".85" />
-      </g>
-      <path d="M9 25h14" stroke="#f5b73b" strokeWidth="1.6" strokeLinecap="round" opacity=".6" />
+      <rect width="32" height="32" rx="3" fill="#0d0b2e" />
+      <rect x=".5" y=".5" width="31" height="31" rx="2.5" fill="none" stroke="#d6b27a" strokeOpacity=".45" />
+      <circle cx="16" cy="16" r="9" fill={`url(#${gid}g)`} opacity=".35" />
+      <rect x="15.2" y="4" width="1.6" height="24" rx=".8" fill={`url(#${gid})`} />
+      <circle cx="16" cy="16" r="6.5" fill="none" stroke="#f3efe6" strokeWidth="1.1" opacity=".9" />
+      <circle cx="16" cy="16" r="1.8" fill="#fff" />
     </svg>
   );
 }
 
-/** Portada generada (degradado índigo→violeta por hash + título + isotipo). Va debajo de la imagen real: si falta o falla, se ve esta. */
-export function CoverArt({ title, small }: { title: string; small?: boolean }) {
-  const h = hash(title);
-  // siempre dentro de la familia índigo: el tono varía poco, lo que cambia es dónde cae la luz
-  const hue = 236 + (h % 22);
-  const lx = 15 + ((h >> 4) % 70);
-  const ly = 10 + ((h >> 8) % 40);
-  const style = {
-    '--cv-hue': hue,
-    '--cv-lx': `${lx}%`,
-    '--cv-ly': `${ly}%`,
-  } as CSSProperties;
-  return (
-    <span className={`cover-art${small ? ' sm' : ''}`} aria-hidden="true" style={style}>
-      <span className="cv-rings" />
-      <span className="cv-mark">
-        <Isotype size={small ? 16 : 28} />
-      </span>
-      {!small && <b>{title}</b>}
-    </span>
-  );
+/** Portada generada (arte generativo de v2 por intención + título en Bodoni). Va debajo de la imagen real: si falta o falla, se ve esta. */
+export function CoverArt({ title, small, n }: { title: string; small?: boolean; n?: number }) {
+  return <GenCover title={title} small={small} n={n} />;
 }
 
 /** Ilustración propia para estados vacíos (anillos + loto). */

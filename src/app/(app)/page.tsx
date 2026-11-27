@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ContinueCarousel, MoreGoals } from '@/components/sin/carousel';
 import { Enter } from '@/components/sin/motion';
+import { Corners } from '@/components/rayo/corners';
+import { Eyebrow, Title } from '@/components/rayo/title';
 import { Avatar, CoverArt, Icon, Progress, Tag, btn } from '@/components/sin/ui';
 import { BLUR } from '@/lib/blur';
 import { fmt, minutes } from '@/lib/fmt';
@@ -13,6 +15,12 @@ import { circleToday } from '@/server/social';
 
 export const metadata: Metadata = { title: 'Inicio' };
 
+/** Saludo según la hora local de la alumna (su zona horaria; Bogotá por defecto). */
+function greeting(tz = 'America/Bogota') {
+  const h = Number(new Intl.DateTimeFormat('es-CO', { hour: 'numeric', hourCycle: 'h23', timeZone: tz }).format(new Date()));
+  return h < 12 ? 'Buenos días' : h < 19 ? 'Buenas tardes' : 'Buenas noches';
+}
+
 function Hero({ over, title, sub, href, cta, cover, value, meta, priority = true }: { over: string; title: string; sub: string; href: string; cta: string; cover: string | null; value?: number; meta: string; priority?: boolean }) {
   return (
     <section className="hx" aria-labelledby="next-step">
@@ -22,13 +30,8 @@ function Hero({ over, title, sub, href, cta, cover, value, meta, priority = true
         </div>
       )}
       <div className="hx-copy">
-        <p className="hx-over">
-          <span className="hx-dot" aria-hidden="true" />
-          {over}
-        </p>
-        <h2 id="next-step" className="hero-title">
-          {title}
-        </h2>
+        <p className="hx-over">{over}</p>
+        <Title as="h2" id="next-step" className="hero-title" text={title} auto />
         <p className="hx-sub">{sub}</p>
         {value !== undefined && (
           <div className="hx-progress">
@@ -45,8 +48,9 @@ function Hero({ over, title, sub, href, cta, cover, value, meta, priority = true
           </span>
         </div>
       </div>
-      <Link href={href} className="hx-art" tabIndex={-1} aria-hidden="true">
+      <Link href={href} className="hx-art" tabIndex={-1} aria-hidden="true" data-cursor="Play">
         <CoverArt title={sub} />
+        <Corners />
         {cover && <Image src={cover} alt="" fill priority={priority} sizes="(min-width: 1024px) 560px, 100vw" placeholder="blur" blurDataURL={BLUR} />}
         <span className="hx-play">
           <Icon name="play_arrow" fill size={28} />
@@ -87,9 +91,8 @@ export default async function Home() {
   if (!user)
     return (
       <div className="page-pad">
-        <h1 className="t-display" style={{ marginTop: 8 }}>
-          Tu práctica con IRB®
-        </h1>
+        <Eyebrow>Academia IRB®</Eyebrow>
+        <Title className="t-display" text="Tu práctica" em="con IRB®." style={{ marginTop: 14 }} />
         <p className="t-body-l c-variant" style={{ marginTop: 8, marginBottom: 24 }}>
           Entra para ver tus cursos y retomar donde quedaste.
         </p>
@@ -113,7 +116,10 @@ export default async function Home() {
   return (
     <Enter className="page-pad">
       <div className="row-c" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, margin: '8px 0 24px' }}>
-        <h1 className="t-page">Hola, {name}</h1>
+        <div className="stack" style={{ gap: 10 }}>
+          <Eyebrow>{greeting(user.timezone ?? undefined)}</Eyebrow>
+          <Title className="t-page" text="Hola," em={`${name}.`} />
+        </div>
         {circle && circle.practicedToday.length > 0 && (
           <Link href="/circulos" className="presence">
             <span className="avatars">
@@ -144,11 +150,9 @@ export default async function Home() {
       ) : null}
 
       {goals.length > 0 && (
-        <section aria-labelledby="goals">
+        <section aria-labelledby="goals" className="reveal">
           <div className="section-h">
-            <h2 id="goals" className="t-modal">
-              Tus objetivos
-            </h2>
+            <Title as="h2" id="goals" className="t-modal" text="Tus" em="objetivos" />
             <Link href="/cursos" className={btn('plain', 'sm')}>
               Ver todos <Icon name="chevron_right" />
             </Link>
@@ -169,11 +173,9 @@ export default async function Home() {
       {cont.length > 0 && <ContinueCarousel items={cont} />}
 
       {fuegos && (
-        <section aria-labelledby="free">
+        <section aria-labelledby="free" className="reveal">
           <div className="section-h">
-            <h2 id="free" className="t-modal">
-              Práctica gratuita
-            </h2>
+            <Title as="h2" id="free" className="t-modal" text="Práctica" em="gratuita" />
           </div>
           <Link href="/practicas/fuegos" className="card interactive goal-card">
             <span className="cover-16x9"><CoverArt title={fuegos.title} small />{fuegos.cover && <Image src={fuegos.cover} alt="" fill sizes="(min-width: 768px) 176px, 96px" placeholder="blur" blurDataURL={BLUR} />}</span>

@@ -16,7 +16,7 @@ import { UserMenu, useShell } from '../sin/shell';
 import { StreakPill } from '../sin/streak';
 import { ClassRow } from '../sin/syllabus';
 import { useUnread } from '../sin/notifications';
-import { Icon, Isotype, Progress, btn } from '../sin/ui';
+import { CoverArt, Icon, Isotype, Progress, btn } from '../sin/ui';
 import { AskDock, AskPanel } from './ask';
 import { Comments } from './comments';
 import { VideoCard } from './media';
@@ -126,6 +126,7 @@ function ClassBar({ outline, onDrawer, onResources }: { outline: OutlineView; on
   return (
     <div className="classbar">
       <span className="cb-badge" aria-hidden="true">
+        <CoverArt title={outline.title} small />
         {outline.cover && <Image src={outline.cover} alt="" fill sizes="48px" />}
       </span>
       <div className="stack" style={{ minWidth: 0, flex: 1 }}>

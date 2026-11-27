@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Prácticas y cursos de IRB® con Ximena Duque Valencia',
     start_url: '/',
     display: 'standalone',
-    background_color: '#12132b',
-    theme_color: '#12132b',
+    background_color: '#07061f',
+    theme_color: '#07061f',
     lang: 'es',
     icons: [
       { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },

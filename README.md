@@ -1,6 +1,6 @@
 # Academia IRB®
 
-Plataforma de cursos y prácticas guiadas de IRB® (reemplazo de LearnDash), desplegada en staging desde `main`. UI con el sistema visual **Sinapsis** en tema oscuro índigo/azafrán.
+Plataforma de cursos y prácticas guiadas de IRB® (reemplazo de LearnDash), desplegada en staging desde `main`. UI con el sistema visual **Rayo**: el lenguaje de [irbximena.com/v2](https://irbximena.com/v2) (noche índigo con rayo WebGL de fondo, Bodoni Moda + Hanken Grotesk, crema y oro, ángulos rectos) sobre la estructura de roles de Sinapsis.
 
 - **Web:** Next.js 15 (App Router) · React 19 · TypeScript estricto · Tailwind v4 · Radix · Motion · TanStack Query.
 - **Datos:** Postgres 16 + Drizzle (migraciones solo aditivas) · Redis 7 (caché, rate limit, presencia, colas BullMQ).
@@ -83,7 +83,9 @@ IRB_SESSION=$(pnpm -s session:token) BASE_URL=http://localhost:4200 pnpm test
 
 ## Reglas del proyecto
 
-- Los componentes usan roles de color (`--sin-*`, `--irb-*` en `src/app/globals.css`), nunca hex sueltos. El azafrán es solo para acciones; el texto sobre azafrán siempre es `on-primary`.
+- Los componentes usan roles de color (`--sin-*`, `--irb-*`), nunca hex sueltos. Los valores de los roles viven en `src/app/rayo.css`, que se carga al final y manda sobre `globals.css` y `v3.css`. La crema (`--sin-primary`) es solo para acciones; el oro (`--irb-gold`) es el acento; el espectro (`--irb-spectrum`) marca estado y progreso.
+- Titulares con `<Title>` (`src/components/rayo/title.tsx`): Bodoni, palabras que suben y remate en cursiva dorada. Portadas sin imagen: `<CoverArt>` dibuja el arte generativo de v2 según la intención del título.
+- El fondo vivo (rayo WebGL, cursor, barra de espectro) está en `src/components/rayo/atmosphere.tsx`: animado en la app, quieto dentro de las clases (no compite con el video) y apagado con `prefers-reduced-motion`.
 - Las migraciones son aditivas: no se borran ni renombran columnas.
 - No cambiar el enlace del embudo FAM 2027 (`EVENT.href` en `src/components/player/nav.tsx`).
 - Nada de blur (`backdrop-filter`) en listas largas ni carruseles.

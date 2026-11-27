@@ -47,7 +47,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           </LiveProvider>
         </MotionConfig>
       </LazyMotion>
-      <Toaster position="bottom-center" offset={24} mobileOffset={{ bottom: 96 }} theme="dark" toastOptions={{ style: { background: 'var(--sin-inverse-surface)', color: 'var(--sin-inverse-on-surface)', border: 0, borderRadius: 12, font: '600 14px/20px var(--font-jakarta)' } }} />
+      <Toaster position="bottom-center" offset={24} mobileOffset={{ bottom: 96 }} theme="dark" toastOptions={{ style: { background: 'var(--sin-inverse-surface)', color: 'var(--sin-inverse-on-surface)', border: 0, borderRadius: 12, font: '600 14px/20px var(--font-text)' } }} />
     </QueryClientProvider>
   );
 }
